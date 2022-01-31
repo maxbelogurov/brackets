@@ -25,16 +25,6 @@ module.exports = function check(str, config) {
   str = Array.from(str);
   // console.log(str, elemSearch)
 
-  // если откытая скобка первая в списке - сразу ошибка, если закрывающая скобка в конце списка - ошиибка. ПОСТАВИТЬ RETURN!
-  for (let i in elemSearch) {
-    if (i % 2 === 0 && elemSearch[i] === str[str.length - 1]) {
-      return false;
-    }
-    if (i % 2 !== 0 && elemSearch[i] === str[0]) {
-      return false;
-    }
-  }
-
   for (let key in elemSearch) { //перебор элементов поиска
     for (let i in str) { //перебор строки
       if (elemSearch[key] === str[i]) { //проверяем равен ли искомый элемент элементу в строке
@@ -58,7 +48,16 @@ module.exports = function check(str, config) {
       }
     }
   };
+  // если откытая скобка первая в списке - сразу ошибка, если закрывающая скобка в конце списка - ошиибка. ПОСТАВИТЬ RETURN!
+  for (let i in elemSearch) {
+    if (i % 2 === 0 && elemSearch[i] === str[str.length - 1]) {
+      checkStatus = false;
+    }
+    if (i % 2 !== 0 && elemSearch[i] === str[0]) {
+      checkStatus = false;
+    }
+  }
 
-  return elemStatus;
+  return checkStatus;
 
 }
